@@ -54,14 +54,14 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openssl.PEMReader;
-import org.eclipse.paho.client.mqttv3.DisconnectedBufferOptions;
-import org.eclipse.paho.client.mqttv3.MqttAsyncClient;
-import org.eclipse.paho.client.mqttv3.MqttCallback;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttSecurityException;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.eclipse.paho.mqttv5.client.DisconnectedBufferOptions;
+import org.eclipse.paho.mqttv5.client.MqttAsyncClient;
+import org.eclipse.paho.mqttv5.client.MqttCallback;
+import org.eclipse.paho.mqttv5.client.MqttClient;
+import org.eclipse.paho.mqttv5.client.MqttConnectionOptions;
+import org.eclipse.paho.mqttv5.common.MqttException;
+import org.eclipse.paho.mqttv5.common.MqttSecurityException;
+import org.eclipse.paho.mqttv5.client.persist.MemoryPersistence;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -128,7 +128,7 @@ public abstract class AbstractClient {
 	
 	protected MqttAsyncClient mqttAsyncClient = null;
 	//private static final MemoryPersistence DATA_STORE = new MemoryPersistence();
-	protected MqttConnectOptions mqttClientOptions;
+	protected MqttConnectionOptions mqttClientOptions;
 	protected MqttCallback mqttCallback;
 	protected int keepAliveInterval = -1;  // default
 	
@@ -181,7 +181,7 @@ public abstract class AbstractClient {
 		LoggerUtility.info(CLASS_NAME, "createClient", "Org ID    = " + getOrgId() +
 				"\n         Client ID    = " + clientId);
 		this.mqttAsyncClient = null;
-		this.mqttClientOptions = new MqttConnectOptions();
+		this.mqttClientOptions = new MqttConnectionOptions();
 		this.mqttCallback = callback;
 	}
 	
@@ -331,18 +331,18 @@ public abstract class AbstractClient {
 			persistence = new MemoryPersistence();
 			mqttAsyncClient = new MqttAsyncClient(serverURI, clientId, persistence);
 			mqttAsyncClient.setCallback(mqttCallback);
-			mqttClientOptions = new MqttConnectOptions();
+			mqttClientOptions = new MqttConnectionOptions();
 			if (clientUsername != null) {
 				mqttClientOptions.setUserName(clientUsername);
 			}
 			if (clientPassword != null) {
-				mqttClientOptions.setPassword(clientPassword.toCharArray());
+				mqttClientOptions.setPassword(clientPassword.getBytes());
 			}
-			mqttClientOptions.setCleanSession(this.isCleanSession());
+			mqttClientOptions.setCleanStart(this.isCleanSession());
 			if(this.keepAliveInterval != -1) {
 				mqttClientOptions.setKeepAliveInterval(this.keepAliveInterval);
 			}
-			mqttClientOptions.setMaxInflight(getMaxInflight());
+			//mqttClientOptions.setMaxInflight(getMaxInflight());
 		} catch (MqttException e) {
 			e.printStackTrace();
 		}
@@ -415,18 +415,18 @@ public abstract class AbstractClient {
 		try {
 			mqttAsyncClient = new MqttAsyncClient(serverURI, clientId, null);
 			mqttAsyncClient.setCallback(mqttCallback);
-			mqttClientOptions = new MqttConnectOptions();
+			mqttClientOptions = new MqttConnectionOptions();
 			if (clientUsername != null) {
 				mqttClientOptions.setUserName(clientUsername);
 			}
 			if (clientPassword != null) {
-				mqttClientOptions.setPassword(clientPassword.toCharArray());
+				mqttClientOptions.setPassword(clientPassword.getBytes());
 			}
-			mqttClientOptions.setCleanSession(this.isCleanSession());
+			mqttClientOptions.setCleanStart(this.isCleanSession());
 			if(this.keepAliveInterval != -1) {
 				mqttClientOptions.setKeepAliveInterval(this.keepAliveInterval);
 			}
-			mqttClientOptions.setMaxInflight(getMaxInflight());
+			//mqttClientOptions.setMaxInflight(getMaxInflight());
 			mqttClientOptions.setAutomaticReconnect(isAutomaticReconnect());
 			
 			SSLContext sslContext = SSLContext.getInstance("TLSv1.2");
@@ -479,19 +479,19 @@ public abstract class AbstractClient {
 		try {
 			mqttAsyncClient = new MqttAsyncClient(serverURI, clientId, null);
 			mqttAsyncClient.setCallback(mqttCallback);
-			mqttClientOptions = new MqttConnectOptions();
+			mqttClientOptions = new MqttConnectionOptions();
 			if (clientUsername != null) {
 				mqttClientOptions.setUserName(clientUsername);
 			}
 			if (clientPassword != null) {
-				mqttClientOptions.setPassword(clientPassword.toCharArray());
+				mqttClientOptions.setPassword(clientPassword.getBytes());
 			}
-			mqttClientOptions.setCleanSession(this.isCleanSession());
+			mqttClientOptions.setCleanStart(this.isCleanSession());
 			if(this.keepAliveInterval != -1) {
 				mqttClientOptions.setKeepAliveInterval(this.keepAliveInterval);
 			}
 			
-			mqttClientOptions.setMaxInflight(getMaxInflight());
+			//mqttClientOptions.setMaxInflight(getMaxInflight());
 			mqttClientOptions.setAutomaticReconnect(isAutomaticReconnect());
 			
 			/* This isn't needed as the production messaging.internetofthings.ibmcloud.com 

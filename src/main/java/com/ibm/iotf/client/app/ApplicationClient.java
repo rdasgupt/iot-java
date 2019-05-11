@@ -24,11 +24,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
-import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
+import org.eclipse.paho.mqttv5.client.IMqttDeliveryToken;
+import org.eclipse.paho.mqttv5.client.MqttCallback;
+import org.eclipse.paho.mqttv5.client.MqttDisconnectResponse;
+import org.eclipse.paho.mqttv5.common.MqttException;
+import org.eclipse.paho.mqttv5.common.MqttMessage;
+import org.eclipse.paho.mqttv5.common.MqttPersistenceException;
+import org.eclipse.paho.mqttv5.common.packet.MqttProperties;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -41,7 +43,7 @@ import com.ibm.iotf.util.LoggerUtility;
  * 
  * This is a derived class from AbstractClient and can be used by end-applications to handle connections with IBM Watson IoT Platform.
  */
-public class ApplicationClient extends AbstractClient implements MqttCallbackExtended {
+public class ApplicationClient extends AbstractClient implements MqttCallback {
 	
 	private static final String CLASS_NAME = ApplicationClient.class.getName();
 	
@@ -1307,6 +1309,24 @@ public class ApplicationClient extends AbstractClient implements MqttCallbackExt
 									Object payload) throws Exception {
 		return publishEventsThroughHttps(this.getOrgId(), this.getDomain(), deviceType, deviceId, 
 				eventName, false, this.getAuthKey(), this.getAuthToken(), payload);
+	}
+
+	@Override
+	public void disconnected(MqttDisconnectResponse disconnectResponse) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mqttErrorOccurred(MqttException exception) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void authPacketArrived(int reasonCode, MqttProperties properties) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

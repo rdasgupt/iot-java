@@ -8,7 +8,7 @@ import java.util.Properties;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.mqttv5.common.MqttException;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

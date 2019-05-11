@@ -1,6 +1,6 @@
 package com.ibm.iotf.test.common;
 
-import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.mqttv5.common.MqttException;
 
 import com.ibm.iotf.devicemgmt.DeviceAction;
 import com.ibm.iotf.devicemgmt.DeviceActionHandler;

@@ -26,13 +26,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.MqttAsyncClient;
-import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
+import org.eclipse.paho.mqttv5.client.IMqttDeliveryToken;
+import org.eclipse.paho.mqttv5.client.MqttAsyncClient;
+import org.eclipse.paho.mqttv5.client.MqttCallback;
+import org.eclipse.paho.mqttv5.client.MqttClient;
+import org.eclipse.paho.mqttv5.client.MqttDisconnectResponse;
+import org.eclipse.paho.mqttv5.common.MqttException;
+import org.eclipse.paho.mqttv5.common.MqttMessage;
+import org.eclipse.paho.mqttv5.common.MqttPersistenceException;
+import org.eclipse.paho.mqttv5.common.packet.MqttProperties;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -59,7 +61,7 @@ import com.ibm.iotf.util.LoggerUtility;
  * 
  * This is a derived class from AbstractClient.
  */
-public class GatewayClient extends AbstractClient implements MqttCallbackExtended{
+public class GatewayClient extends AbstractClient implements MqttCallback{
 	
 	private static final String CLASS_NAME = GatewayClient.class.getName();
 	
@@ -930,6 +932,24 @@ public class GatewayClient extends AbstractClient implements MqttCallbackExtende
 			}
 			
 		}
+	}
+
+	@Override
+	public void disconnected(MqttDisconnectResponse disconnectResponse) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mqttErrorOccurred(MqttException exception) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void authPacketArrived(int reasonCode, MqttProperties properties) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

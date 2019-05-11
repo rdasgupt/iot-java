@@ -14,7 +14,7 @@ package com.ibm.iotf.client.app;
 
 import java.io.UnsupportedEncodingException;
 
-import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.mqttv5.common.MqttMessage;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;

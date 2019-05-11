@@ -2,7 +2,7 @@ package com.ibm.iotf.test.common;
 
 import java.util.Properties;
 
-import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.mqttv5.common.MqttException;
 
 import com.ibm.iotf.test.common.TestHelper;
 import com.ibm.iotf.util.LoggerUtility;

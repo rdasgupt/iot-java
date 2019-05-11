@@ -12,8 +12,8 @@
  */
 package com.ibm.internal.iotf.devicemgmt;
 
-import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
-import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.mqttv5.client.IMqttMessageListener;
+import org.eclipse.paho.mqttv5.common.MqttException;
 
 import com.google.gson.JsonObject;
 import com.ibm.iotf.devicemgmt.CustomActionHandler;

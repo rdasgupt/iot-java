@@ -15,7 +15,7 @@ package com.ibm.iotf.client.gateway;
 
 import java.io.UnsupportedEncodingException;
 
-import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.mqttv5.common.MqttMessage;
 
 import com.ibm.iotf.client.Message;
 

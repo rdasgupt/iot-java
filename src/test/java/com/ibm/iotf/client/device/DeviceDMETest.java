@@ -8,7 +8,7 @@ import java.util.Properties;
 
 import junit.framework.TestCase;
 
-import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.mqttv5.common.MqttException;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 

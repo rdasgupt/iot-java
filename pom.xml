@@ -56,6 +56,13 @@
   		</repository>
 	</distributionManagement>
 
+	<repositories>
+    	<repository>
+        	<id>Eclipse Paho Repo</id>
+        	<url>https://repo.eclipse.org/content/repositories/paho-snapshots/</url>
+    	</repository>
+	</repositories>
+
     <properties>
         <!-- General properties -->
         <java.version>1.7</java.version>
@@ -92,8 +99,8 @@
         </dependency>
         <dependency>
             <groupId>org.eclipse.paho</groupId>
-            <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
-            <version>1.2.0</version>
+            <artifactId>org.eclipse.paho.mqttv5.client</artifactId>
+            <version>1.2.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>commons-net</groupId>

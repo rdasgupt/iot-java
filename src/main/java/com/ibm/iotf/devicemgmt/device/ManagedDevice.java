@@ -32,12 +32,12 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
-import org.eclipse.paho.client.mqttv3.MqttAsyncClient;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.mqttv5.client.IMqttDeliveryToken;
+import org.eclipse.paho.mqttv5.client.IMqttMessageListener;
+import org.eclipse.paho.mqttv5.client.MqttAsyncClient;
+import org.eclipse.paho.mqttv5.client.MqttClient;
+import org.eclipse.paho.mqttv5.common.MqttException;
+import org.eclipse.paho.mqttv5.common.MqttMessage;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -742,8 +742,8 @@ public class ManagedDevice extends DeviceClient implements IMqttMessageListener,
 				} catch(MqttException ex) {
 					long wait;
 					switch (ex.getReasonCode()) {
-					case MqttException.REASON_CODE_CLIENT_NOT_CONNECTED:
-					case MqttException.REASON_CODE_CLIENT_DISCONNECTING:
+					case MqttException.REASON_CODE_CLIENT_EXCEPTION :
+					//case MqttException.REASON_CODE_CLIENT_DISCONNECTING:
 						try {
 							LoggerUtility.log(Level.WARNING, CLASS_NAME, METHOD, " Connection Lost retrying to publish MSG :"+
 									new String(message.getPayload(), "UTF-8") + " on topic "+topic+" every 5 seconds");
@@ -752,9 +752,9 @@ public class ManagedDevice extends DeviceClient implements IMqttMessageListener,
 						}
 						wait = 5 * 1000;
 						break;
-					case MqttException.REASON_CODE_MAX_INFLIGHT:
-						wait = 50;
-						break;
+					//case MqttException.REASON_CODE_MAX_INFLIGHT:
+					//	wait = 50;
+					//	break;
 					default:
 						throw ex;
 					}
